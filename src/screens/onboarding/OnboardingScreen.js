@@ -16,47 +16,21 @@ import {ButtonWithIcon} from '../../components/buttons/Buttons';
 
 export default function OnboardingScreen(props) {
   const [userNameValue, setUserNameValue] = React.useState('');
-  console.log(userNameValue, 'kkkk');
+
   return (
     <View style={{flex: 1, backgroundColor: 'white'}}>
       <Swiper
         showsPagination={true}
         showsButtons={false}
         style={{backgroundColor: 'white', height: '65%'}}
-        dot={
-          <View
-            style={{
-              backgroundColor: '#f3f3f3',
-              width: 8,
-              height: 8,
-              borderRadius: 4,
-
-              marginLeft: 3,
-              marginRight: 3,
-            }}
-          />
-        }
-        activeDot={
-          <View
-            style={{
-              backgroundColor: colors.pink,
-              width: 8,
-              height: 8,
-              borderRadius: 4,
-
-              marginLeft: 3,
-              marginRight: 3,
-            }}
-          />
-        }>
+        dot={<View style={styles.inActiveDotStyle} />}
+        activeDot={<View style={styles.activeDotStyle} />}>
         <View
           style={{
             display: 'flex',
             flexDirection: 'column',
             flex: 1,
-
             justifyContent: 'center',
-
             alignItems: 'center',
           }}>
           <Image
@@ -69,47 +43,16 @@ export default function OnboardingScreen(props) {
             source={require('../../assets/images/phone.png')}
           />
 
-          <Text
-            style={{
-              color: colors.black,
-              fontWeight: fontWeight.bold,
-              fontSize: fontSize.medium,
-              marginBottom: margin.xsmall,
-              marginTop: margin.medium,
-            }}>
-            Organize your works
-          </Text>
-          <Text
-            style={{
-              color: colors.gray,
-              fontWeight: fontWeight.light,
-              fontSize: fontSize.xxsmall,
-              marginBottom: margin.xxxsmall,
-            }}>
+          <Text style={styles.containerOneMainText}>Organize your works</Text>
+          <Text style={styles.containerOneSubText}>
             Let's organise your work with priority
           </Text>
-          <Text
-            style={{
-              color: colors.gray,
-              fontWeight: fontWeight.light,
-              fontSize: fontSize.xxsmall,
-            }}>
+          <Text style={styles.containerOneSubText}>
             and do everything without stress
           </Text>
         </View>
 
-        <View
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            flex: 1,
-
-            justifyContent: 'center',
-
-            alignItems: 'center',
-
-            paddingHorizontal: padding.xsmall,
-          }}>
+        <View style={styles.containerOne}>
           <View style={styles.sheetContainer}>
             <Text style={styles.inputHelper}>Enter user name</Text>
             <TextInput
@@ -123,24 +66,10 @@ export default function OnboardingScreen(props) {
         </View>
       </Swiper>
 
-      <View
-        style={{
-          height: '35%',
-          backgroundColor: 'white',
-          paddingHorizontal: padding.xsmall,
-        }}>
+      <View style={styles.containerTwo}>
         <View style={{marginBottom: margin.xsmall, marginTop: margin.xsmall}}>
           <ButtonWithIcon
-            style={[
-              {
-                paddingVertical: 16,
-                borderRadius: borderRadius.medium,
-                display: 'flex',
-                flexDirection: 'row',
-                alignItems: 'center',
-                backgroundColor: colors.greyLight,
-              },
-            ]}
+            style={[styles.btnOneStyle]}
             onPress={() =>
               props.navigation.navigate('HomeScreen', {
                 unm: userNameValue,
@@ -153,16 +82,7 @@ export default function OnboardingScreen(props) {
 
         <View style={{marginBottom: margin.xsmall}}>
           <ButtonWithIcon
-            style={[
-              {
-                paddingVertical: 16,
-                borderRadius: borderRadius.medium,
-                display: 'flex',
-                flexDirection: 'row',
-                alignItems: 'center',
-                backgroundColor: colors.greyLight,
-              },
-            ]}
+            style={[[styles.btnOneStyle]]}
             onPress={() =>
               props.navigation.navigate('HomeScreen', {
                 unm: userNameValue,
@@ -176,14 +96,9 @@ export default function OnboardingScreen(props) {
         <View style={{marginBottom: margin.xsmall}}>
           <ButtonWithIcon
             style={[
+              styles.btnTwoStyle,
               {
                 ...boxWithShadow,
-                paddingVertical: 16,
-                borderRadius: borderRadius.medium,
-                display: 'flex',
-                flexDirection: 'row',
-                alignItems: 'center',
-                backgroundColor: colors.greyLight,
               },
             ]}
             onPress={() =>
@@ -222,5 +137,70 @@ const styles = StyleSheet.create({
     color: colors.gray,
     fontSize: fontSize.xxsmall,
     borderRadius: borderRadius.medium,
+  },
+
+  inActiveDotStyle: {
+    backgroundColor: '#f3f3f3',
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+
+    marginLeft: 3,
+    marginRight: 3,
+  },
+
+  activeDotStyle: {
+    backgroundColor: colors.pink,
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+
+    marginLeft: 3,
+    marginRight: 3,
+  },
+
+  containerOne: {
+    display: 'flex',
+    flexDirection: 'column',
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingHorizontal: padding.xsmall,
+  },
+
+  containerOneMainText: {
+    color: colors.black,
+    fontWeight: fontWeight.bold,
+    fontSize: fontSize.medium,
+    marginBottom: margin.xsmall,
+    marginTop: margin.medium,
+  },
+  containerOneSubText: {
+    color: colors.gray,
+    fontWeight: fontWeight.light,
+    fontSize: fontSize.xxsmall,
+    marginBottom: margin.xxxsmall,
+  },
+  containerTwo: {
+    height: '35%',
+    backgroundColor: 'white',
+    paddingHorizontal: padding.xsmall,
+  },
+
+  btnOneStyle: {
+    paddingVertical: 16,
+    borderRadius: borderRadius.medium,
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: colors.greyLight,
+  },
+  btnTwoStyle: {
+    paddingVertical: 16,
+    borderRadius: borderRadius.medium,
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: colors.greyLight,
   },
 });

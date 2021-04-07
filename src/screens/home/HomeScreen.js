@@ -198,15 +198,8 @@ export default function HomeScreen(props) {
   const {unm} = props.route.params;
 
   return (
-    <View
-      style={{
-        flex: 1,
-        backgroundColor: colors.white,
-      }}>
-      <View
-        style={{
-          height: '92%',
-        }}>
+    <View style={styles.container}>
+      <View style={styles.topContainer}>
         <View style={{marginTop: margin.large}}>
           <DashboardHeader name={unm.length > 2 ? unm : 'User'} />
 
@@ -248,15 +241,7 @@ export default function HomeScreen(props) {
                 paddingHorizontal: padding.xsmall,
               }}>
               <View style={{marginTop: margin.small}}>
-                <Text
-                  style={{
-                    fontWeight: fontWeight.regular,
-                    color: colors.gray,
-                    fontSize: fontSize.xxsmall,
-                    marginBottom: margin.xxsmall,
-                  }}>
-                  Tasks
-                </Text>
+                <Text style={styles.tasksTextStyle}>Tasks</Text>
                 <View>
                   {headerTitleToFilterByForUnCompletedTask.map(
                     (item, index) => {
@@ -284,15 +269,7 @@ export default function HomeScreen(props) {
               </View>
 
               <View style={{marginTop: margin.small}}>
-                <Text
-                  style={{
-                    fontWeight: fontWeight.regular,
-                    color: colors.gray,
-                    fontSize: fontSize.xxsmall,
-                    marginBottom: margin.xxsmall,
-                  }}>
-                  Completed
-                </Text>
+                <Text style={styles.completedTextStyle}>Completed</Text>
                 <View>
                   {headerTitleToFilterByForCompletedTask.map((item, index) => {
                     return (
@@ -415,14 +392,7 @@ export default function HomeScreen(props) {
               </View>
 
               {showDate && (
-                <View
-                  style={{
-                    display: 'flex',
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    justifyContent: 'space-evenly',
-                    marginTop: margin.xsmall,
-                  }}>
+                <View style={styles.showDateStyle}>
                   <View style={{width: '50%'}}>
                     <Text style={styles.inputHelper}>Start time</Text>
                     <RNDateTimePicker
@@ -444,36 +414,9 @@ export default function HomeScreen(props) {
               )}
             </View>
 
-            <View
-              style={[
-                styles.sheetContainer,
-                {
-                  display: 'flex',
-                  flexDirection: 'row',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
-                },
-              ]}>
-              <Text
-                style={{
-                  color: colors.black,
-                  fontSize: fontSize.xsmall,
-                  fontWeight: fontWeight.bold,
-                }}>
-                Get alert for this task
-              </Text>
-              <View
-                style={{
-                  display: 'flex',
-                  flexDirection: 'row',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
-                  width: 70,
-                  backgroundColor: colors.purple,
-                  paddingVertical: padding.xxxsmall,
-                  paddingHorizontal: padding.xxsmall,
-                  borderRadius: borderRadius.medium,
-                }}>
+            <View style={[styles.sheetContainer, styles.getTaskContainer]}>
+              <Text style={styles.taskForTheWeek}>Get alert for this task</Text>
+              <View style={styles.switchStyle}>
                 <Text style={{color: colors.greyLight}}>On</Text>
                 <Text style={{color: colors.greyLight}}>|</Text>
               </View>
@@ -493,6 +436,14 @@ export default function HomeScreen(props) {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: colors.white,
+  },
+
+  topContainer: {
+    height: '92%',
+  },
   sheetContainer: {
     marginBottom: margin.small,
   },
@@ -513,6 +464,51 @@ const styles = StyleSheet.create({
     color: colors.gray,
     fontSize: fontSize.xxsmall,
 
+    borderRadius: borderRadius.medium,
+  },
+  tasksTextStyle: {
+    fontWeight: fontWeight.regular,
+    color: colors.gray,
+    fontSize: fontSize.xxsmall,
+    marginBottom: margin.xxsmall,
+  },
+  completedTextStyle: {
+    fontWeight: fontWeight.regular,
+    color: colors.gray,
+    fontSize: fontSize.xxsmall,
+    marginBottom: margin.xxsmall,
+  },
+
+  showDateStyle: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-evenly',
+    marginTop: margin.xsmall,
+  },
+
+  getTaskContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+
+  taskForTheWeek: {
+    color: colors.black,
+    fontSize: fontSize.xsmall,
+    fontWeight: fontWeight.bold,
+  },
+
+  switchStyle: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    width: 70,
+    backgroundColor: colors.purple,
+    paddingVertical: padding.xxxsmall,
+    paddingHorizontal: padding.xxsmall,
     borderRadius: borderRadius.medium,
   },
 });

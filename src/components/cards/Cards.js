@@ -26,18 +26,17 @@ export function CardWithText({
   return (
     <TouchableOpacity
       onPress={onPress}
-      style={{
-        ...boxWithSmallShadow,
-        display: 'flex',
-        flexDirection: 'row',
-        backgroundColor: backgroundColor,
-        alignSelf: 'flex-start',
-        paddingVertical: paddingVertical,
-        paddingHorizontal: paddingHorizontal,
-        borderRadius: borderRadius.medium,
-        borderWidth: 1,
-        borderColor: 'transparent',
-      }}>
+      style={[
+        styles.cardWithOutTextContainer,
+        {
+          ...boxWithSmallShadow,
+
+          backgroundColor: backgroundColor,
+
+          paddingVertical: paddingVertical,
+          paddingHorizontal: paddingHorizontal,
+        },
+      ]}>
       {iconPresent && (
         <View style={{marginRight: margin.xxxsmall}}>
           <Icon name={iconName} color={colors.black} size={fontSize.small} />
@@ -65,94 +64,48 @@ export function TaskCard({
   taskDetails,
 }) {
   return (
-    <View
-      style={{
-        ...boxWithSmallShadow,
-        padding: padding.xsmall,
-        backgroundColor: colors.greyLight,
-        borderRadius: borderRadius.xlarge,
-      }}>
+    <View style={[styles.cardWithTextContainer, {...boxWithSmallShadow}]}>
       <View>
-        <View
-          style={{
-            display: 'flex',
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-          }}>
+        <View style={styles.cardWithTextContainerItem}>
           <View>
-            <View style={{display: 'flex', flexDirection: 'row'}}>
+            <View style={styles.contentOne}>
               <Text
-                style={{
-                  textDecorationLine: taskCompleted ? 'line-through' : 'none',
-                  fontWeight: fontWeight.bold,
-                  fontSize: fontSize.xsmall,
-                  marginBottom: margin.xxxsmall,
-                }}>
+                style={[
+                  styles.textTitleStyle,
+                  {textDecorationLine: taskCompleted ? 'line-through' : 'none'},
+                ]}>
                 {taskTitle}
               </Text>
               {!taskCompleted && (
                 <View
-                  style={{
-                    top: 5,
-                    height: 5,
-                    width: 5,
-                    borderRadius: 5,
-                    backgroundColor: taskDetailsPresent
-                      ? colors.purple
-                      : colors.pink,
-                    marginLeft: margin.mini,
-                  }}
+                  style={[
+                    styles.taskCompletedStyle,
+                    {
+                      backgroundColor: taskDetailsPresent
+                        ? colors.purple
+                        : colors.pink,
+                    },
+                  ]}
                 />
               )}
             </View>
-            <View
-              style={{
-                display: 'flex',
-                flexDirection: 'row',
-                alignItems: 'flex-start',
-              }}>
+            <View style={styles.contentTwo}>
               <Icon name="bell" size={fontSize.xxsmall} color={colors.gray} />
-              <View
-                style={{
-                  display: 'flex',
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  marginLeft: 2,
-                  top: -3,
-                }}>
-                <Text
-                  style={{
-                    fontWeight: fontWeight.light,
-                    fontSize: fontSize.xxxsmall,
-                    color: colors.gray,
-                  }}>
-                  {startTime}
-                </Text>
-                <Text
-                  style={{
-                    color: colors.gray,
-                    marginHorizontal: 2,
-                  }}>
-                  -
-                </Text>
-                <Text style={{fontSize: fontSize.xxxsmall, color: colors.gray}}>
-                  {endTime}
-                </Text>
+              <View style={styles.contentTwoItem}>
+                <Text style={styles.startTimeStyle}>{startTime}</Text>
+                <Text style={styles.dividerStyle}>-</Text>
+                <Text style={styles.endTimeStyle}>{endTime}</Text>
               </View>
             </View>
           </View>
           <TouchableOpacity
             onPress={onPressCompletedTask}
-            style={{
-              borderRadius: borderRadius.round,
-              borderWidth: 0.2,
-              borderColor: colors.gray,
-              height: 20,
-              width: 20,
-              //   padding: 2,
-              backgroundColor: taskCompleted ? colors.purple : colors.white,
-            }}>
+            style={[
+              styles.completeTaskContainer,
+              {
+                backgroundColor: taskCompleted ? colors.purple : colors.white,
+              },
+            ]}>
             {taskCompleted && (
               <Icon
                 style={{top: 3, left: 3}}
@@ -165,17 +118,97 @@ export function TaskCard({
         </View>
         {taskDetailsPresent && (
           <View>
-            <Text
-              style={{
-                marginTop: margin.xxxsmall,
-                color: colors.gray,
-                fontSize: fontSize.xxxsmall,
-              }}>
-              {taskDetails}
-            </Text>
+            <Text style={styles.taskDetailsStyle}>{taskDetails}</Text>
           </View>
         )}
       </View>
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  cardWithOutTextContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignSelf: 'flex-start',
+    borderRadius: borderRadius.medium,
+    borderWidth: 1,
+    borderColor: 'transparent',
+  },
+
+  cardWithTextContainer: {
+    padding: padding.xsmall,
+    backgroundColor: colors.greyLight,
+    borderRadius: borderRadius.xlarge,
+  },
+
+  cardWithTextContainerItem: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+
+  contentOne: {
+    display: 'flex',
+    flexDirection: 'row',
+  },
+
+  textTitleStyle: {
+    fontWeight: fontWeight.bold,
+    fontSize: fontSize.xsmall,
+    marginBottom: margin.xxxsmall,
+  },
+
+  taskCompletedStyle: {
+    top: 5,
+    height: 5,
+    width: 5,
+    borderRadius: 5,
+    marginLeft: margin.mini,
+  },
+
+  contentTwo: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+  },
+
+  contentTwoItem: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginLeft: 2,
+    top: -3,
+  },
+
+  startTimeStyle: {
+    fontWeight: fontWeight.light,
+    fontSize: fontSize.xxxsmall,
+    color: colors.gray,
+  },
+
+  endTimeStyle: {
+    fontSize: fontSize.xxxsmall,
+    color: colors.gray,
+  },
+
+  dividerStyle: {
+    color: colors.gray,
+    marginHorizontal: 2,
+  },
+
+  completeTaskContainer: {
+    borderRadius: borderRadius.round,
+    borderWidth: 0.2,
+    borderColor: colors.gray,
+    height: 20,
+    width: 20,
+  },
+
+  taskDetailsStyle: {
+    marginTop: margin.xxxsmall,
+    color: colors.gray,
+    fontSize: fontSize.xxxsmall,
+  },
+});

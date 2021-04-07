@@ -18,14 +18,12 @@ export function Footer({addTodoPress}) {
       </TouchableOpacity>
       <TouchableOpacity
         onPress={addTodoPress}
-        style={{
-          ...boxWithShadow,
-          padding: padding.xxxsmall,
-          backgroundColor: colors.pink,
-          borderRadius: borderRadius.medium,
-          borderWidth: 1,
-          borderColor: 'transparent',
-        }}>
+        style={[
+          styles.footerContainerItem,
+          {
+            ...boxWithShadow,
+          },
+        ]}>
         <Icon name={'plus'} color={colors.white} size={fontSize.small} />
       </TouchableOpacity>
       <TouchableOpacity>
@@ -42,5 +40,13 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly',
     alignItems: 'center',
     zIndex: 100,
+  },
+
+  footerContainerItem: {
+    borderWidth: 1,
+    borderColor: 'transparent',
+    padding: padding.xxxsmall,
+    backgroundColor: colors.pink,
+    borderRadius: borderRadius.medium,
   },
 });
